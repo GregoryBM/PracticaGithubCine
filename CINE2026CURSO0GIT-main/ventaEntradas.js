@@ -1,6 +1,6 @@
 var aPelis=new Array("Que bello es vivir","Solo en casa","Cuento de Navidad","Gladiator ||");
-var aLoc= new Array(50,120,60,100);
-var aSalas=new Array("1","2","3","4");
+var aLoc= new Array(50,120,60,120);
+var aSalas=new Array("1","2","3","2");
 
 //Almacenamos la localidades vendidas por sala: aVendidas1, aVendidas2 y aVendidas3
 //y las vendidas en la pelicula seleccionada en el array vendidas
@@ -35,7 +35,7 @@ function seleccionarPeli(){
             vendidas=aVendidas3.slice(0,aVendidas3.length);
             break;
              case "4":
-            vendidas=aVendidas3.slice(0,aVendidas4.length);
+            vendidas=aVendidas2.slice(0,aVendidas2.length);
             break;
     }
     pintarButacas();    
@@ -56,12 +56,21 @@ function pintarButacas(){
                 contenedor.innerHTML+="<br>";
             }
         }
-        if (numButacas==vendidas.length){
-            contenedor.innerHTML+="<br><img  src='img/soldout.png' alt='Sin localidades'title='Localidades agotadas. Seleccione otra película.'>"
-        }
-        else{
-            contenedor.innerHTML+="<br><br><button id='btnConfirm' onclick='confirmarVenta();' title='Comprar entradas'>Comprar</button>"
-        }
+
+// --- EVOLUTIVO: SALA MEDIO LLENA ---
+    if (vendidas.length > (numButacas / 2) && vendidas.length < numButacas) {
+        contenedor.innerHTML += "<p style='color: orange; font-weight: bold;'>WARNING: ¡Más del 50% de las entradas vendidas! Date prisa en reservar.</p>";
+    }
+
+    if (numButacas==vendidas.length){
+        contenedor.innerHTML+="<br><img src='img/soldout.png' alt='Sin localidades' title='Localidades agotadas. Seleccione otra película.'>";
+    }
+    else{
+        contenedor.innerHTML+="<br><br><button id='btnConfirm' onclick='confirmarVenta();' title='Comprar entradas'>Comprar</button>";
+    }
+
+
+      
 }
 
 /*Cuando se selecciona una localidad se comprueba si esta libre y se guarda o se borra
@@ -99,9 +108,6 @@ function confirmarVenta(){
                 aVendidas2=vendidas.slice(0,vendidas.length);
                 break;
             case "3":
-                aVendidas3=vendidas.slice(0,vendidas.length);
-                break;
-            case "4":
                 aVendidas3=vendidas.slice(0,vendidas.length);
                 break;
             }
