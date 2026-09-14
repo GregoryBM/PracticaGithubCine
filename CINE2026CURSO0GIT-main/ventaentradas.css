@@ -39,6 +39,9 @@ table{
 
 img{
     cursor: pointer;
+     height: 100px;
+    width: 100px;
+
 }
 img:hover{ 
     opacity: 0.5;
